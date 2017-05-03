@@ -18,7 +18,9 @@ var mixin = function (rdf, options) {
 
   require('./lib/utils')(rdf)
 
-  if (typeof process !== 'undefined' && process.versions && process.versions.node) {
+  if (typeof self !== 'undefined' && self.fetch) {
+    require('./lib/utils-fetch')(rdf)
+  } else if (typeof process !== 'undefined' && process.versions && process.versions.node) {
     require('./lib/utils-node')(rdf)
   } else {
     require('./lib/utils-browser')(rdf)
